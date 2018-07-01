@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+ActiveRecord::Base.establish_connection("#{Rails.env}_alpha".to_sym)
+alpha_data = ActiveRecord::Base.connection.select_all("SELECT * FROM Users;").to_hash
+
+ActiveRecord::Base.establish_connection(Rails.env.to_sym)
+User.destroy_all
+alpha_data.each do |alpha_user|
+  user = User.create(id: alpha_user['id'], name: alpha_user['name'])
+  user.emails.create(adress: alpha_user['email'])
+end
+
+ActiveRecord::Base.connection.select_all("SELECT * FROM Users;").to_hash
