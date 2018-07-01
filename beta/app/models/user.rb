@@ -4,14 +4,30 @@ class User < ApplicationRecord
 
   def surjective_data_sync
     begin
+      email = representative_email
+
       ActiveRecord::Base.establish_connection(:development_alpha)
       # FIXME: You must sanitize params.
-      alpha_data = ActiveRecord::Base.connection.execute(
-        "UPDATE Users
-          SET name = '#{self.name}'
+      alpha_data = ActiveRecord::Base.connection.select_one(
+        "SELECT * FROM Users
           WHERE id = #{self.id}
         "
       )
+      if alpha_data.present?
+        ActiveRecord::Base.connection.execute(
+          "UPDATE Users
+            SET name = '#{self.name}', email = '#{email}'
+            WHERE id = #{self.id}
+          "
+        )
+      else
+        ActiveRecord::Base.connection.execute(
+          "INSERT INTO Users
+            (id, name, email, created_at, updated_at)
+            VALUES ('#{self.id}', #{self.name}, '#{email}', '#{self.created_at}', '#{self.updated_at}')
+          "
+        )
+      end
     rescue => ex
       raise
     ensure
@@ -19,4 +35,7 @@ class User < ApplicationRecord
     end
   end
 
+  def representative_email
+    self.emails.pluck(:adress).reject{|i|i.blank?}.first.to_s
+  end
 end

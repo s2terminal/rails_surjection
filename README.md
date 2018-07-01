@@ -27,6 +27,8 @@ $ cd alpha && bin/rails server --port 3001
 $ cd beta  && bin/rails server --port 3002
 ```
 
+Hit http://localhost:3001/users and http://localhost:3002/users
+
 ### Cold sync from ALPHA to BETA
 ```
 $ cd beta && bin/rails db:seed; cd -
@@ -34,9 +36,8 @@ $ cd beta && bin/rails db:seed; cd -
 
 ### Surjective hot sync from BETA to ALPHA
 If you sync User data from BETA to ALPHA, you need to choice *representative* record of email from BETA Email records what User record has.
-```
-# TODO
-```
+
+As you access BETA project users page and hit "Edit" or "New User" action, automaticaly change ALPHA record which corresponding to BETA record you change
 
 ## License
 
