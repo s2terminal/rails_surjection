@@ -13,7 +13,7 @@ alpha_data = ActiveRecord::Base.connection.select_all("SELECT * FROM Users;").to
 ActiveRecord::Base.establish_connection(:development)
 User.destroy_all
 alpha_data.each do |alpha_user|
-  user = User.create(name: alpha_user['name'])
+  user = User.create(id: alpha_user['id'], name: alpha_user['name'])
   user.emails.create(adress: alpha_user['email'])
 end
 

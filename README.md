@@ -13,8 +13,7 @@ There are two Rails projects.
 
 Alpha column|Beta column
 --|--
-User.id|-
--|User.id
+User.id|User.id
 User.name|User.name
 -|Email.id
 User.email|User.emails.representative.address
