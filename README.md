@@ -25,6 +25,7 @@ User.email|User.emails.representative.address
 ```
 $ cd alpha && bin/rails server --port 3001
 $ cd beta  && bin/rails server --port 3002
+$ cd beta  && bin/rake jobs:work
 ```
 
 Hit http://localhost:3001/users and http://localhost:3002/users

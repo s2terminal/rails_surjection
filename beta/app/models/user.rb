@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :emails, dependent: :destroy
-  after_commit :surjective_data_sync
+  after_save -> { UserDataSyncerJob.perform_later(self) }
 
   def surjective_data_sync
     begin
