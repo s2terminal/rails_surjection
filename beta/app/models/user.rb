@@ -6,7 +6,7 @@ class User < ApplicationRecord
     begin
       email = representative_email
 
-      ActiveRecord::Base.establish_connection(:development_alpha)
+      ActiveRecord::Base.establish_connection("#{Rails.env}_alpha".to_sym)
       # FIXME: You must sanitize params.
       alpha_data = ActiveRecord::Base.connection.select_one(
         "SELECT * FROM Users
@@ -31,7 +31,7 @@ class User < ApplicationRecord
     rescue => ex
       raise
     ensure
-      ActiveRecord::Base.establish_connection(:development)
+      ActiveRecord::Base.establish_connection(Rails.env.to_sym)
     end
   end
 
