@@ -1,0 +1,23 @@
+in:
+  type: mysql
+  host: localhost
+  user: root
+  password: ""
+  database: development_alpha
+  table: users
+filters:
+  - type: column
+    columns:
+      - { name: user_id, src: id }
+      - { name: adress, src: email }
+      - { name: created_at }
+      - { name: updated_at }
+
+out:
+  type: mysql
+  host: localhost
+  user: root
+  password: ""
+  database: development_beta
+  table: emails
+  mode: truncate_insert
