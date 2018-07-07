@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_07_01_154331) do
 
-  create_table "delayed_jobs", force: :cascade do |t|
+  create_table "delayed_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
@@ -27,18 +27,19 @@ ActiveRecord::Schema.define(version: 2018_07_01_154331) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "emails", force: :cascade do |t|
-    t.integer "user_id"
+  create_table "emails", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
     t.string "adress"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_emails_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "emails", "users"
 end

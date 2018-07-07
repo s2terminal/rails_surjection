@@ -31,6 +31,16 @@ $ cd beta  && bin/rake jobs:work
 Hit http://localhost:3001/users and http://localhost:3002/users
 
 ### Cold sync from ALPHA to BETA
+
+```
+$ embulk run embulk/cold/users.yml
+$ embulk run embulk/cold/emails.yml
+```
+
+## DEPRECATED
+
+### Cold sync from ALPHA to BETA
+
 ```
 $ cd beta && bin/rails db:seed; cd -
 ```
