@@ -38,9 +38,17 @@ $ embulk run embulk/cold/emails.yml
 
 ### Surjective Hot sync from BETA to ALPHA
 
+Checking difference between two tables.
+```
+$ bin/rails mysql_view:check[users,beta_users]
+There is no difference between users and beta_users.
+```
+
+Swaping two tables.
 ```
 $ cd alpha && bin/rails mysql_view:swap[users,beta_users]
 ```
+When swaping table and view, ALPHA application start to use view which created from beta table.
 
 ----
 ## DEPRECATED
