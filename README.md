@@ -25,19 +25,28 @@ User.email|User.emails.representative.address
 ```
 $ cd alpha && bin/rails server --port 3001
 $ cd beta  && bin/rails server --port 3002
-$ cd beta  && bin/rake jobs:work
 ```
 
 Hit http://localhost:3001/users and http://localhost:3002/users
 
-### Cold sync from ALPHA to BETA
+### One-time Cold sync from ALPHA to BETA
 
 ```
 $ embulk run embulk/cold/users.yml
 $ embulk run embulk/cold/emails.yml
 ```
 
+### Surjective Hot sync from BETA to ALPHA
+
+```
+$ mysql -uroot < mysql/switch/alpha.sql
+```
+
 ## DEPRECATED
+
+```
+$ cd beta && bin/rake jobs:work
+```
 
 ### Cold sync from ALPHA to BETA
 
