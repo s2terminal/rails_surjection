@@ -39,9 +39,10 @@ $ embulk run embulk/cold/emails.yml
 ### Surjective Hot sync from BETA to ALPHA
 
 ```
-$ mysql -uroot < mysql/switch/alpha.sql
+$ cd alpha && bin/rails mysql_view:swap[users,beta_users]
 ```
 
+----
 ## DEPRECATED
 
 ```
